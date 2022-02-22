@@ -1,6 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
+//////////////////////test
+import { useSelector, useDispatch } from "react-redux";
+import {increment, decrement} from "./redux/store"
+//////////////////////////
 
 import ContactForm from "components/ContactForm/ContactForm";
 import ContactList from "components/ContactList/ContactList";
@@ -63,8 +67,19 @@ export default function App() {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
 
+  //////////////////////////test
+  const dispatch = useDispatch();
+  const value = useSelector(state => state.myValue);
+  ///////////////////////////////
   return (
     <>
+      <div>test 
+        {value}
+        <button onClick={() => dispatch(increment(100))}>inc</button>
+        <button onClick={()=> dispatch(decrement(50))}>Dec</button>
+      </div>
+
+
       <TitleForm>Phonebook</TitleForm>
       <ContactForm onSubmit={formSubmitHandler} />
 
