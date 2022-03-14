@@ -26,12 +26,12 @@ export default function ContactForm({ onSubmit }) {
       enableReinitialize
       initialValues={{ name: "", number: "" }}
       validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values,{ resetForm}) => {
         onSubmit(values);
-        setSubmitting(false);
+        resetForm(); 
       }}
     >
-      <Form autoComplete="off">
+      <Form autoComplete="off" >
         <ContainerForm>
           <LabelForm htmlFor="name">Name</LabelForm>
           <Field type="text" name="name" />

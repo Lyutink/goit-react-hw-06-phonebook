@@ -1,18 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-//import { createAction, createReducer, createSlice } from '@reduxjs/toolkit';
-//import { myValueSlice } from "./contacts/contactsSlice";
-//import { itemSlice } from "./items/slice";
-import { contactsSlice } from "./contacts/contactsSlice";
+import { configureStore} from "@reduxjs/toolkit";
 
-// export const store = configureStore({
-//     reducer: {
-//         myValue: myValueSlice.reducer,
-//         items: itemSlice.reducer,
-//     },
-// })
+import { itemsSlice } from "./items/itemsSlice";
+import { filterSlice } from "./filter/filterSlice";
 
 export const store = configureStore({
+
     reducer: {
-        contacts: contactsSlice.reducer,
-    },
+       
+            items: itemsSlice.reducer,
+            filter: filterSlice.reducer,
+       
+    }
 });

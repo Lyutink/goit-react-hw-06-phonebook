@@ -1,11 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {useSelector, useDispatch } from 'react-redux';
 import { nanoid } from "nanoid";
-//////////////////////test
 
-
-import { addNewContact, deleteContact } from "../redux/contacts/contactsSlice";
+import { addNewContact, deleteContact } from "../redux/items/itemsSlice";
+import { onChangeFilter } from "redux/filter/filterSlice";
 //////////////////////////
 
 import ContactForm from "components/ContactForm/ContactForm";
@@ -24,15 +23,16 @@ import { TitleContacts } from "components/Contact/Contact.styled";
 ////////////////////////////
 export default function App() {
   //const [contacts, setContacts] = useState(initialContacts);
-  const contacts = useSelector(state => state.contacts);
-  console.log("contacts", contacts);
+  const contacts = useSelector(state => state.items);
+  const filter = useSelector(state => state.filter);
+ 
   const dispatch = useDispatch();
   // const [contacts, setContacts] = useState(() => {
   //   const userContacts = JSON.parse(localStorage.getItem("contacts"));
   //   // return userContacts ? userContacts : initialContacts;
   //   return userContacts ?? initialContacts;
   // });
-  const [filter, setFilter] = useState("");
+ // const [filter, setFilter] = useState("");
 
   const checkContact = (name) => {
     const normilizedName = name.toLowerCase();
@@ -61,7 +61,10 @@ export default function App() {
    };
 
   const changeFilter = (event) => {
-    setFilter(event.currentTarget.value);
+    const inquiry = event.currentTarget.value;
+    console.log("filter change", inquiry);
+    dispatch(onChangeFilter(event.currentTarget.value))
+    //setFilter(event.currentTarget.value);
   };
 
   const onDeleteContact = (idContact) => {
@@ -76,19 +79,8 @@ export default function App() {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
 
-  //////////////////////////test
-
- // const value = useSelector(state => state.myValue);
-  ///////////////////////////////
   return (
     <>
-      {/* <div>test 
-        {value}
-        <button onClick={() => dispatch(increment(100))}>inc</button>
-        <button onClick={()=> dispatch(decrement(50))}>Dec</button>
-      </div> */}
-
-
       <TitleForm>Phonebook</TitleForm>
       <ContactForm onSubmit={formSubmitHandler} />
 
